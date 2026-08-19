@@ -1,14 +1,14 @@
 # Download the dataset
-"""
+
 import kagglehub
 
 path = kagglehub.dataset_download(
-"muki2003/yolo-drone-detection-dataset", 
-    output_dir=r"C:\drone_project"
+    "muki2003/yolo-drone-detection-dataset",
+    output_dir=r"C:\drone_dataset"
 )
 
-print("Dataset saved at:", path)
-"""
+print(path)
+
 
 import numpy as np
 import os
@@ -118,3 +118,16 @@ def display_image_and_box(image_name):
 
 
 display_image_and_box("yoto10847")
+
+# %%
+
+# Minimla transfer learning approach
+from ultralytics import YOLO
+
+model = YOLO("yolo11n.pt")
+
+model.train(
+    data=r"C:\drone_dataset\data.yaml",
+    epochs=50,
+    imgsz=640
+)
